@@ -14,7 +14,7 @@ Performing majority of the ERP operations with simple DEBITS and CREDITS will st
 This area is still work in progress.... So I may change things here
 
 # Current Progress
-Currently I am working on  account types and their interaction with IFRS and Tax Codes.
+Currently I am working on  building models for Accounts & Transaction. And doing some research to properly mapping accounts to IFRS and Tax codes.
 
 
 
