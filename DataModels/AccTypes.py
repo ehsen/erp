@@ -26,7 +26,17 @@ Actual work is compliance & reporting, which is way more complex.
 SO RULE OF THUMB IS : Explicit is better than implicit.  
 """
 
+# This enum is created to simplify grouping of various accounts. It will simplify
+# query the MongoDB
 
+class AccGroup(Enum):
+    CurrentAsset = "CurrentAsset"
+    NonCurrentAsset = "NonCurrentAsset"
+    CurrentLiability = "CurrentLiability"
+    NonCurrentLiability = "NonCurrentLiability"
+    COGS = "COGS"
+    Income = "Income"
+    Expense = "Expense"
 
 class AccType(Enum):
     CurrentAsset = "CurrentAsset"
@@ -35,7 +45,7 @@ class AccType(Enum):
     NonCurrentLiability = "NonCurrentLiability"
     Depreciation = "Depreciation"
     COGS = "COGS"
-    Income = "Income"
+    Income = "Income" # IFRS 15.
     Expense = "Expense"
     IncomeTaxWithheld = "IncomeTaxWithheld"
     SalesTaxWithheld = "SalesTaxWithheld"
@@ -55,3 +65,15 @@ class AccType(Enum):
     DefferedTaxAsset = "DefferedTaxAsset" #IAS12
     DefferedTaxLiability = "DefferedTaxLiability" #IAS12
     InvestmentProperty = "InvestmentProperty" # IAS40
+
+
+class Side(Enum):
+    DEBIT = "DEBIT"
+    CREDIT = "CREDIT"
+
+
+class TransTypes(Enum):
+    JournalEntry = "JournalEntry"
+    CashEntry = "CashEntry"
+    BankEntry = "BankEntry"
+    StockEntry = "StockEntry"
