@@ -1,9 +1,6 @@
-from dataclasses import dataclass
-from enum import Enum
-import uuid
 from mongoengine.fields import *
-from mongoengine import Document,connect
-from AccTypes import AccType,AccGroup
+from mongoengine import Document
+from Kernel.AccTypes import AccType,AccGroup,Side
 
 """
 THIS IS THE STARTING POINT OF ERP. If you are reading code start from here
@@ -20,7 +17,8 @@ AT THE MOMENT I WILL FOCUS ONLY ON TAX COMPLAINCE OF PAKISTAN and IFRS.
 """
 
 class Account(Document):
-    code = IntField()
+    doc_id = StringField(unique=True)
+
     acc_group = EnumField(AccGroup)
     acc_type = EnumField(AccType)
     name = StringField(max_length=30)
@@ -29,16 +27,25 @@ class Account(Document):
     tags = DictField()
 
 
-@dataclass
-class Transaction:
-    tranx_id = StringField()
 
-
+class TransactionModel(Document):
+    """
+    This class defines structure of Transaction in database. account field should be a reference. But I want to
+    avoid refrences. Data accuracy can be ensured at validation level.
+    """
+    doc_id = StringField(unique=True)
+    uuid = UUIDField(primary_key=True,unique_with='doc_id')
+    date_time = DateTimeField()
+    side = EnumField(Side)
+    account = StringField()
+    amount = FloatField()
+    round_off_diff = FloatField()
 
 class Item(Document):
-    item_code = StringField(max_length=30)
+    doc_id = StringField(unique=True)
+    item_code = StringField(max_length=30,unique=True)
     name = StringField(max_length=30)
-    uuid = UUIDField(binary=False)
+    uuid = UUIDField(binary=False,unique=True)
 
 #x=Account(code = 1,name="Rent Account")
 #x.save()
