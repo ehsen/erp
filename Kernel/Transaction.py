@@ -1,7 +1,12 @@
 import uuid
-from AccTypes import Side
+
+from dataclasses import dataclass
 from datetime import datetime
-from pydantic import *
+from DataModels import MongoModels
+
+
+
+
 
 class Transaction:
     """"
@@ -9,21 +14,38 @@ class Transaction:
     any transaction where debits and credits are involved Such as Process Costing in a manufacturing
     enviorenement.
     """
-    """"
-    def __init__(self,date_time:datetime,side:str,account:str,amount:float):
+
+    def __init__(self,trans_data:list):
+
         self.uuid = uuid.uuid4()
-        self.date_time = date_time
-        self.side = side
-        self.account = account
-        self.amount = amount
-    """
+        self.trans_data = trans_data
+
+
+
+
+
+    def validate_transaction(self):
+        for item in self.trans_data:
+            pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
     def gen_transaction(self):
         return self
-
-
 
 
 
