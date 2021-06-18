@@ -2,9 +2,9 @@
 A full blown ERP with automatic compliance with IFRS and Tax authorities. 
 
 # Why another ERP
-I am starting this project out of frustration with current ERPs and accounting softwares. Becuase they are just doing high school accounting or requires highly expensive customization. Plus have you ever try to explain IFRS 9 to a programmer? Good Luck with that.
+I am starting this project out of frustration with current ERPs and accounting softwares. Becuase they are just doing high school accounting or requires highly expensive customization for serious compliance. Plus have you ever try to explain IFRS 9 to a programmer? Good Luck with that.
 
-Being an accountant, at the end I am the one who is preparing all returns for tax authorities, ensuring compliance with IFRS. ERPs are presenting me with fancy graphs and dashboards which in most cases are useless, at least for me. Businesses dont pay me for fancy graphs. 
+Being an accountant, at the end I am the one who is preparing all returns for tax authorities, ensuring compliance with IFRS and juggling with myriad of tasks just because my ERP is stupid. ERPs are presenting me with fancy graphs and dashboards which in most cases are useless, at least for me. Businesses dont pay me for fancy graphs. 
 
 # About Architecture
 ERPs are inherently complex software however I ll try to implement it in a simple, straightforward way. Everything is a MongoDB document in our ERP which will go through
