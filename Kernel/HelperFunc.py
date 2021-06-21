@@ -37,7 +37,8 @@ def validate_accs(acc_list:list,data:dict) -> bool:
 
 def is_debit_credit_eq(trans_data:list) -> (bool,float,float):
     """
-    This function checks whether debits and credits are equal in transaction data
+    This function checks whether debits and credits are equal in transaction data.
+    Note: This function should only be used after transaction data is validated against mongo model
 
     :param trans_data:
     :return:
@@ -49,8 +50,8 @@ def is_debit_credit_eq(trans_data:list) -> (bool,float,float):
             sum_of_debits += item.get("amount")
         elif item.get("side") == "CREDIT":
             sum_of_credits += item.get("amount")
-    print(sum_of_debits)
-    print(sum_of_credits)
+    #print(sum_of_debits)
+    #print(sum_of_credits)
     if sum_of_debits != sum_of_credits:
         return False,sum_of_debits,sum_of_credits
     elif sum_of_debits == sum_of_credits:
@@ -67,3 +68,4 @@ def filter_dict_list(key,value,dict_list:list) -> list:
     """
     result = [d for d in dict_list if d.get(key)==value]
     return result
+
