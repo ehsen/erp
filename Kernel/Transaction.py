@@ -3,6 +3,7 @@ import uuid
 from dataclasses import dataclass
 from datetime import datetime
 from DataModels import MongoModels
+from dummy_data import list_data
 
 
 
@@ -10,9 +11,9 @@ from DataModels import MongoModels
 
 class Transaction:
     """"
-    This class is the core of ERP. It generates accounting transactions plus it will be basis
+    This class is the core of ERP. It generates accounting transactions plus it will be basis of
     any transaction where debits and credits are involved Such as Process Costing in a manufacturing
-    enviorenement.
+    enviorenement or stock movement etc...
     """
 
     def __init__(self,trans_data:list):
@@ -27,7 +28,6 @@ class Transaction:
     def validate_transaction(self):
         for item in self.trans_data:
             pass
-
 
 
 
