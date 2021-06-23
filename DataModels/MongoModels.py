@@ -64,6 +64,18 @@ class TransSeq(Document):
 class ItemSeq(Document):
     doc_id = SequenceField(unique=True)
 
+class EntityModel(Document):
+    uuid = UUIDField(required=True)
+    entity_type = StringField(required=True)
+    name = StringField(required=True)
+    address = StringField()
+    city = StringField()
+    country = StringField()
+    extra_data = DictField()
+
+
+
+
 
 
 
