@@ -79,3 +79,4 @@ class TransTypes(Enum):
     StockEntry = "StockEntry"
     PayableEntry = "PayableEntry"
     ReceivableEntry = "ReceivableEntry"
+    AssetEntry = "AssetEntry"

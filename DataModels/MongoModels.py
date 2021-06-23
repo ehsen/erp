@@ -73,6 +73,13 @@ class EntityModel(Document):
     country = StringField()
     extra_data = DictField()
 
+class StockEntryModel(TransactionModel):
+    warehouse_name = StringField(required=True,max_length=30)
+    item_name = StringField(required=True)
+
+class AssetRegister(Document):
+    pass
+
 
 
 
