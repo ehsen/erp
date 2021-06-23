@@ -1,6 +1,8 @@
-from datetime import datetime
-import uuid
+import mongoengine
 
+from erp_errors import DocIDFailed
+from mongoengine import register_connection,connect
+import os
 """
 Helper functions are some general ultilities which doesn't fit anywhere.
 """
@@ -25,7 +27,7 @@ def handle_round_off(amount:float) -> (float,float):
 
 def validate_accs(acc_list:list,data:dict) -> bool:
     """
-    This function checks whether the entered accounts are correct. It will compare entered accounts
+    This function checks whether the accounts in Transaction are correct. It will compare entered accounts
     against some cache
 
     :param schema:
@@ -68,4 +70,41 @@ def filter_dict_list(key,value,dict_list:list) -> list:
     """
     result = [d for d in dict_list if d.get(key)==value]
     return result
+
+def generate_doc_id(model_name:object):
+    """
+    This function takes input from MongoModels class to generate a doc_id. For example
+    if you want to generate doc_id for a transaction you will use give TransSeq class from
+    MongoModels as input to this function.
+    :return: Int
+    """
+
+    init_model = model_name()
+    doc_id = init_model.save()
+    #print(doc_id.doc_id)
+    #print(type(doc_id.doc_id))
+
+    if isinstance(doc_id.doc_id,int):
+        return doc_id.doc_id
+    else:
+        raise DocIDFailed("Failed to generate document id (doc_id)")
+
+def connect_db():
+    MONGO_DB_ALIAS = os.getenv('MONGO_DB_ALIAS')
+    MONGO_TEST_URL = os.getenv('MONGO_TEST_URL')
+
+    retries = 0
+    while retries <= 10:
+        try:
+            register_connection('erp_db',db=MONGO_DB_ALIAS,host=MONGO_TEST_URL)
+            print("DB Connected")
+            return True
+        except Exception:
+            retries += 1
+            if retries == 10:
+                raise
+
+
+
+
 
