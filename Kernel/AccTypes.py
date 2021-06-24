@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+
 from enum import Enum
 
 """
@@ -37,6 +37,8 @@ class AccGroup(Enum):
     COGS = "COGS"
     Income = "Income"
     Expense = "Expense"
+    Equity = "Equity"
+
 
 class AccType(Enum):
     CurrentAsset = "CurrentAsset"
@@ -80,3 +82,15 @@ class TransTypes(Enum):
     PayableEntry = "PayableEntry"
     ReceivableEntry = "ReceivableEntry"
     AssetEntry = "AssetEntry"
+
+class StockEntryTypes(Enum):
+    WarehouseMovement = "WarehouseMovement"
+    Sale = "Sale"
+    Purchase = "Purchase"
+    PurchaseReturn = "PurchaseReturn"
+    SalesReturn = "SalesReturn"
+    OpeningBalance = "OpeningBalance"
+
+
+
+

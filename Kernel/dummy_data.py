@@ -17,3 +17,6 @@ list_data_wrong_amounts = [{"date_time":datetime(2021,4,4),'side':"DEBIT",'accou
              ,{"date_time":datetime(2021,4,4),'side':"CREDIT",'account':"TEST","amount":155.0,
         "uuid":uuid.uuid4(),"round_off_diff":12.0,"doc_id":"Hello"}]
 
+
+account_data = [{"acc_group":"CurrentAsseg","acc_type":"CurrentAsseg","name":"Cash"}]
+

@@ -1,8 +1,9 @@
 import mongoengine
 
-from erp_errors import DocIDFailed
+#from erp_errors import DocIDFailed
 from mongoengine import register_connection,connect
 import os
+
 """
 Helper functions are some general ultilities which doesn't fit anywhere.
 """
@@ -87,7 +88,7 @@ def generate_doc_id(model_name:object):
     if isinstance(doc_id.doc_id,int):
         return doc_id.doc_id
     else:
-        raise DocIDFailed("Failed to generate document id (doc_id)")
+        raise #DocIDFailed("Failed to generate document id (doc_id)")
 
 def connect_db():
     MONGO_DB_ALIAS = os.getenv('MONGO_DB_ALIAS')
@@ -96,14 +97,13 @@ def connect_db():
     retries = 0
     while retries <= 10:
         try:
-            register_connection('erp_db',db=MONGO_DB_ALIAS,host=MONGO_TEST_URL)
+            connect(db=MONGO_DB_ALIAS,alias="default",host=MONGO_TEST_URL)
             print("DB Connected")
             return True
         except Exception:
             retries += 1
             if retries == 10:
                 raise
-
 
 
 

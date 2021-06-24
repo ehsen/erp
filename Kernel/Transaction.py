@@ -25,6 +25,7 @@ class Transaction:
 
 
 
+
     def validate_transaction(self):
         for item in self.trans_data:
             pass
