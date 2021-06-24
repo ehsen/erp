@@ -1,5 +1,5 @@
 # ERP
-A full blown ERP with automatic compliance with IFRS and Tax authorities. 
+A full blown ERP with automatic compliance for IFRS and Tax authorities. 
 
 # Why another ERP
 I am starting this project out of frustration with current ERPs and accounting softwares. Becuase they are just doing high school accounting or requires highly expensive customization for serious compliance. Plus have you ever try to explain IFRS 9 to a programmer? Good Luck with that.
