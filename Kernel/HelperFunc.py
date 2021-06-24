@@ -105,6 +105,22 @@ def connect_db():
             if retries == 10:
                 raise
 
+def parse_error(validation_error:str,data_dict:dict):
+    """
+    This function parse the mongoengine validation error and returns the list of fields
+    with validation error. This function requires the mongoengine validation error and original data_dict
+    against which the validation is applied.
+
+    :param validation_error:
+    :param data_dict:
+    :return:
+    """
+
+    keys_list = [item for item in data_dict.keys()]
+    invalid_data = []
+    for item in keys_list:
+        if item in validation_error:
+            invalid_data.append(item)
 
 
-
+    return invalid_data

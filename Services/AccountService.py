@@ -1,7 +1,7 @@
 from DataModels.MongoModels import Account
 from mongoengine import ValidationError
 from Kernel import dummy_data
-
+from Kernel import HelperFunc
 
 class AccountService:
     """
@@ -20,24 +20,23 @@ class AccountService:
             Account(**acc_data).validate()
             return True,acc_data
         except ValidationError as e:
-            print(self.parse_error(str(e)))
-            raise
-        except Exception:
-            raise
+            invalid_fields=HelperFunc.parse_error(str(e),acc_data)
+            return False,invalid_fields
+        except Exception as e:
+            return False,str(e)
 
     def save_to_db(self,data):
         pass
 
-    def parse_error(self,validation_error:str):
-        error_str = validation_error.split("of")
-        return error_str
+
 
 """
 data = dummy_data.account_data[0]
 x = AccountService()
 print(x.new_account(data))
 """
-
+#x= AccountService()
+#x.parse_error("ofofo",{"acc_type":"hello","acc_group":"group"})
 
 
 
