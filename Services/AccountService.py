@@ -1,8 +1,8 @@
-from DataModels.MongoModels import Account
+from DataModels.MongoModels import Account,IfrsCodes
 from mongoengine import ValidationError
 from Kernel import dummy_data
 from Kernel import HelperFunc
-
+from MongoService import MongoService
 class AccountService:
     """
     This class will provide all logic related to an Account.
@@ -17,23 +17,55 @@ class AccountService:
         :return:
         """
         try:
-            Account(**acc_data).validate()
-            return True,acc_data
+            #TODO Need to rethink whether I should validate data here
+
+            mongo_obj = Account(**acc_data)
+
+            mongo_obj.validate()
+
+            return mongo_obj
         except ValidationError as e:
             invalid_fields=HelperFunc.parse_error(str(e),acc_data)
             return False,invalid_fields
         except Exception as e:
             return False,str(e)
 
-    def save_to_db(self,data):
-        pass
+    def new_ifrs_code(self,data:dict):
+        """
+        Creates a new IFRS code. Basically its just placeholder for consistency sake. Otherwise the ifrs data
+        can be directly dumped to MongoDB without performing any validation, since pydantic will handle the validation
+        part.
+        :param data:
+        :return:
+        """
+        mongo_obj = IfrsCodes(**data)
+        return mongo_obj
 
+
+
+
+
+
+
+
+
+
+
+
+HelperFunc.connect_db()
+data = dummy_data.account_data[0]
+x = AccountService()
+obj = x.new_account(data)
+result,id = MongoService.save_to_db(obj)
+print(f"result = {result}, id = {type(id)}")
 
 
 """
-data = dummy_data.account_data[0]
-x = AccountService()
-print(x.new_account(data))
+HelperFunc.connect_db()
+data = dummy_data.ifrs_data[0]
+x= AccountService()
+obj = x.new_ifrs_code(data)
+MongoService.save_to_db(obj)
 """
 #x= AccountService()
 #x.parse_error("ofofo",{"acc_type":"hello","acc_group":"group"})

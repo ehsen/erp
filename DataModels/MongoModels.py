@@ -3,6 +3,8 @@ from mongoengine import Document,connect,EmbeddedDocument
 from Kernel.AccTypes import AccType,AccGroup,Side,TransTypes
 from Kernel.HelperFunc import connect_db
 from Kernel.dummy_data import list_data
+from mongoengine.queryset.base import DENY
+
 
 """
 THIS IS THE STARTING POINT OF ERP. If you are reading code start from here
@@ -17,8 +19,8 @@ AT THE MOMENT I WILL FOCUS ONLY ON TAX COMPLIANCE OF PAKISTAN and IFRS.
 """
 
 
-class IFRSCodes(Document):
-    ifrs_code = StringField(required=True)
+class IfrsCodes(Document):
+    ifrs_code = StringField(unqiue=True,required=True)
     description = StringField()
 
 class Address(EmbeddedDocument):
@@ -39,7 +41,7 @@ class Account(Document):
     acc_type = EnumField(AccType,required=True)
     name = StringField(max_length=30,required=True)
     tax_code = StringField()
-    ifrs_code = ReferenceField(IFRSCodes)
+    ifrs_code = StringField()
     tags = DictField()
     meta = {'allow_inheritance':True}
 
